@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Простой сайт</title>
+    <style>
+        /* Лёгкие стили */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f0f2f5;
+        }
+        .card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 24px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+        h1 {
+            font-size: 28px;
+            color: #1a1a2e;
+            margin-bottom: 16px;
+        }
+        .counter {
+            font-size: 64px;
+            font-weight: 700;
+            color: #16213e;
+            margin: 20px 0;
+        }
+        .btn {
+            background: #0f3460;
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            font-size: 18px;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            margin: 6px 8px;
+        }
+        .btn:hover {
+            background: #1a4a7a;
+        }
+        .btn:active {
+            transform: scale(0.96);
+        }
+        .btn-reset {
+            background: #e94560;
+        }
+        .btn-reset:hover {
+            background: #c73a52;
+        }
+        .info {
+            margin-top: 20px;
+            color: #555;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>👋 Привет!</h1>
+        <p style="color: #555; margin-bottom: 4px;">Нажми на кнопку:</p>
+
+        <!-- Счётчик -->
+        <div class="counter" id="counterDisplay">0</div>
+
+        <!-- Кнопки управления -->
+        <div>
+            <button class="btn" id="incrementBtn">➕ Увеличить</button>
+            <button class="btn btn-reset" id="resetBtn">🔄 Сброс</button>
+        </div>
+
+        <!-- Доп. функция: показать, чётное или нечётное -->
+        <div class="info" id="parityInfo">Чётное</div>
+    </div>
+
+    <script>
+        // --- Лёгкая функция: счётчик с проверкой чётности ---
+
+        // 1. Находим элементы
+        const counterDisplay = document.getElementById('counterDisplay');
+        const incrementBtn = document.getElementById('incrementBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const parityInfo = document.getElementById('parityInfo');
+
+        // 2. Состояние (данные)
+        let count = 0;
+
+        // 3. Функция обновления интерфейса
+        function updateUI() {
+            // Показываем число
+            counterDisplay.textContent = count;
+
+            // Лёгкая функция: определяем чётность
+            if (count % 2 === 0) {
+                parityInfo.textContent = '✨ Чётное';
+                parityInfo.style.color = '#0f3460';
+            } else {
+                parityInfo.textContent = '🌟 Нечётное';
+                parityInfo.style.color = '#e94560';
+            }
+        }
+
+        // 4. Функции-обработчики
+        function increment() {
+            count += 1;
+            updateUI();
+        }
+
+        function reset() {
+            count = 0;
+            updateUI();
+        }
+
+        // 5. Привязываем к кнопкам
+        incrementBtn.addEventListener('click', increment);
+        resetBtn.addEventListener('click', reset);
+
+        // 6. Инициализация (показать начальное состояние)
+        updateUI();
+    </script>
+
+</body>
+</html>
